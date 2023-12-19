@@ -120,8 +120,26 @@ section{
     font-weight: 600;
     letter-spacing: .1rem;
     color: var(--bg-color);
-
+    z-index: 1;
+    overflow: hidden;
+    transition: .5s;
 }
+
+.btn-box .btn:hover{
+    color: var(--main-color);
+}
+
+.btn-box .btn:nth-child(2){
+    background: transparent;
+    color: var(--main-color);
+}
+
+
+.btn-box .btn:nth-child(2)::before{
+    background-color: var(--main-color);
+    color: var(--main-color)
+}
+
 
 .btn-box .btn::before{
     content: '';
@@ -129,5 +147,33 @@ section{
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 100%; 
+    background-color: var(--bg-color);
+    z-index: -1;
+    transition: .5s;
 }
+
+.btn-box .btn:hover::before{
+    width: 100%;
+}
+
+.home-sci{
+    position: absolute;
+    bottom: 4rem;
+    width: 170px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.home-sci a{
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: .2rem solid var(--main-color);
+    border-radius: 50%;
+}
+
