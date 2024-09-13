@@ -672,53 +672,7 @@ section{
     cursor: pointer;
 }
 
-.footer{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    padding: 2rem 9%;
-    background-color: var(--second-bg-color);
-    height: 50px;
-}
 
-.footer-text p{
-    font-size: 1.6rem;
-}
-
-.footer-iconTop a{
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding: .8rem;
-    background: var(--main-color);
-    border: .2rem solid var(--main-color);
-    border-radius: .6rem;
-    z-index: 1;
-}
-
-.footer-iconTop a::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:  var(--second-bg-color) ;
-    z-index: -1;
-    transition: .6s;
-}
-
-.footer-iconTop a i{
-    font-size: 2.4rem;
-    color: var(--bg-color);
-    transition: .6s;
-}
-
-.footer-iconTop a:hover i{
-    color: var(--main-color);
-}
 
 
 /*breakpoints:*/
@@ -744,4 +698,174 @@ section{
     .footer{
         padding: 2rem 4%;
     }
+}
+/* project*/
+.projects {
+    background-color: var(--second-bg-color);
+    padding: 5rem 9%;
+    text-align: center;
+}
+
+.projects-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.project {
+    flex: 1 1 30%;
+    background-color: var(--bg-color);
+    border: .2rem solid var(--main-color);
+    padding: 2rem;
+    border-radius: .8rem;
+    transition: transform 0.3s ease-in-out;
+    text-align: left;
+}
+
+.project:hover {
+    transform: translateY(-10px);
+}
+
+.project h3 {
+    color: var(--main-color);
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.project p {
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+}
+
+.project .btn {
+    display: inline-block;
+    padding: 1rem 2rem;
+    background-color: var(--main-color);
+    color: var(--bg-color);
+    border-radius: .5rem;
+    text-decoration: none;
+}
+
+.project .btn:hover {
+    background-color: var(--bg-color);
+    color: var(--main-color);
+}
+
+.project-img {
+    width: 100%;
+    height: auto;
+    border-radius: .5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tech-stack {
+    margin-bottom: 1.5rem;
+}
+
+.tech-stack span {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+    padding: .5rem 1rem;
+    border-radius: .5rem;
+    margin-right: .5rem;
+    font-size: 1.2rem;
+}
+
+.view-more {
+    margin-top: 3rem;
+}
+
+.view-more .btn {
+    padding: 1rem 2rem;
+    background-color: var(--main-color);
+    color: var(--bg-color);
+    border-radius: .5rem;
+    text-decoration: none;
+}
+
+.view-more .btn:hover {
+    background-color: var(--bg-color);
+    color: var(--main-color);
+}
+
+
+
+
+/* Buttons hover effect */
+.btn:hover {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+    transform: translateY(-3px);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Project image hover */
+.project-img {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.5s ease-in-out;
+}
+
+.project-img:hover {
+    transform: scale(1.05);
+}
+
+.project:hover .project-img {
+    opacity: 0.8;
+}
+
+/* Tech stack hover effect */
+.tech-stack span:hover {
+    background-color: var(--bg-color);
+    color: var(--main-color);
+    transition: 0.3s ease;
+}
+/* addition al style*/
+/* Parallax effect for the home section */
+.home {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+
+/* Animated button hover effect */
+.btn:hover {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+    transform: translateY(-5px);
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease-in-out;
+}
+
+/* Social icons hover */
+.social-links a {
+    transition: transform 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.social-links a:hover {
+    transform: rotate(360deg);
+    color: var(--main-color);
+}
+
+/* Project card hover */
+.project {
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.project:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/* Parallax effect for the home section */
+.home {
+    background-attachment: fixed;
+    background-position: center;
+    background-size: cover;
+}
+.error {
+    color: red;
+    font-size: 1.4rem;
+    margin-top: 5px;
+    display: none;
 }

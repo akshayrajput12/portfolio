@@ -1,29 +1,272 @@
-//scroll section
+// Scroll section - Highlight active nav link based on scroll position
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('header nav a');
 
-let sections = document.querySelectorAll('section');
-let navlinks =document.querySelectorAll('header nav a');
-window.onscroll = () => {
-    //sticky header
-    sections.forEach(sec => {
-        let top =window.scrollY;
-        let offset =sec.offsetTop -100;
-        let height =sec.offsetHeight;
-        let id= sec.getAttribute('id');
+window.addEventListener('scroll', () => {
+    let currentSection = '';
 
-        if(top >= offset && top < offset){
-            navlinks.forEach(links=> {
-                links.classList.remove('active');
-                document/querySelector('header nav a[href*=' + id + ']').classList.add('active');
-            })
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        if (window.scrollY >= sectionTop - 100) {
+            currentSection = section.getAttribute('id');
         }
-    })
-}
-//smooth scroll 
-navlinks.forEach((link) => {
+    });
+
+    navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').includes(currentSection)) {
+            link.classList.add('active');
+        }
+    });
+});
+
+// Smooth scroll behavior for navbar links
+navLinks.forEach(link => {
     link.addEventListener('click', (e) => {
         e.preventDefault();
         document.querySelector(e.target.getAttribute('href')).scrollIntoView({
             behavior: 'smooth'
-        })
-    })
-})
+        });
+    });
+});
+
+// Scroll to top button visibility
+const scrollToTopBtn = document.querySelector('.scroll-to-top a');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        scrollToTopBtn.classList.add('show-scroll');
+    } else {
+        scrollToTopBtn.classList.remove('show-scroll');
+    }
+});
+
+// GSAP Animations for sections - Slightly slower and visible when scrolled into view
+gsap.registerPlugin(ScrollTrigger);
+
+// Animate header immediately on page load
+gsap.from(".header", {
+    duration: 1.0,
+    y: -50,
+    opacity: 0,
+    ease: "power3.out"
+});
+
+// Immediate home content animation without parallax
+gsap.from(".home-content", {
+    duration: 1.0,
+    opacity: 0,
+    y: 20,
+    ease: "power3.out",
+    onStart: () => {
+        document.querySelector('.home-content').style.opacity = 1;
+    }
+});
+
+// Projects section animation
+gsap.from(".projects-row", {
+    opacity: 0,
+    y: 30,
+    duration: 1.0,
+    stagger: 0.2,
+    scrollTrigger: {
+        trigger: ".projects-row",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+    }
+});
+
+// Footer section animation
+gsap.from(".footer-container", {
+    opacity: 0,
+    y: 20,
+    duration: 1.2,
+    scrollTrigger: {
+        trigger: ".footer",
+        start: "top 90%",
+        toggleActions: "play none none reverse"
+    }
+});
+
+// Navbar links animation on scroll
+gsap.from(".navbar a", {
+    opacity: 0,
+    y: -15,
+    duration: 0.8,
+    stagger: 0.1,
+    scrollTrigger: {
+        trigger: ".navbar",
+        start: "top 95%",
+        toggleActions: "play none none reverse"
+    }
+});
+
+// Make About section immediately visible when scrolled into view
+gsap.fromTo(".about-content", 
+    { opacity: 0, y: 50 },  // Starting point
+    { opacity: 1, y: 0, duration: 0.3, ease: "power2.out",  // Fast duration for immediate visibility
+      scrollTrigger: {
+        trigger: ".about",
+        start: "top 90%",  // Trigger the animation as soon as the section is in the viewport
+        toggleActions: "play none none none"
+    }}
+);
+
+// Skills section animation
+gsap.from(".skills-column", {
+    opacity: 0,
+    y: 20,
+    duration: 1.0,
+    stagger: 0.2,
+    scrollTrigger: {
+        trigger: ".skills",
+        start: "top 85%",
+        toggleActions: "play none none reverse"
+    }
+});
+
+// Footer final animation
+gsap.from(".footer-container", {
+    opacity: 0,
+    scale: 0.8,
+    duration: 1.5,
+    scrollTrigger: {
+        trigger: ".footer",
+        start: "top 90%",
+        end: "bottom 80%",
+        toggleActions: "play none none reverse"
+    }
+});
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent form submission
+    
+    // Clear previous error messages
+    clearErrors();
+
+    // Get form values
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    let isValid = true;
+
+    // Full Name validation
+    if (fullName === '') {
+        showError('nameError', 'Full Name is required.');
+        isValid = false;
+    }
+
+    // Email validation
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (email === '') {
+        showError('emailError', 'Email Address is required.');
+        isValid = false;
+    } else if (!emailPattern.test(email)) {
+        showError('emailError', 'Please enter a valid Email Address.');
+        isValid = false;
+    }
+
+    // Phone number validation (should be exactly 10 digits)
+    const phonePattern = /^\d{10}$/;
+    if (phone === '') {
+        showError('phoneError', 'Phone Number is required.');
+        isValid = false;
+    } else if (!phonePattern.test(phone)) {
+        showError('phoneError', 'Phone Number must be 10 digits.');
+        isValid = false;
+    }
+
+    // Message validation
+    if (message === '') {
+        showError('messageError', 'Please enter your message.');
+        isValid = false;
+    }
+
+    // If all fields are valid, submit the form
+    if (isValid) {
+        alert('Form submitted successfully!');
+        // Here, you can perform the form submission using AJAX or traditional form submission
+        // e.g., contactForm.submit();
+    }
+});
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault(); // Prevent form submission
+    
+    // Clear previous error messages
+    clearErrors();
+
+    // Get form values
+    const fullName = document.getElementById('fullName').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    let isValid = true;
+
+    // Full Name validation
+    if (fullName === '') {
+        showError('nameError', 'Full Name is required.');
+        isValid = false;
+    }
+
+    // Email validation
+    const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    if (email === '') {
+        showError('emailError', 'Email Address is required.');
+        isValid = false;
+    } else if (!emailPattern.test(email)) {
+        showError('emailError', 'Please enter a valid Email Address.');
+        isValid = false;
+    }
+
+    // Phone number validation (should be exactly 10 digits)
+    const phonePattern = /^\d{10}$/;
+    if (phone === '') {
+        showError('phoneError', 'Phone Number is required.');
+        isValid = false;
+    } else if (!phonePattern.test(phone)) {
+        showError('phoneError', 'Phone Number must be 10 digits.');
+        isValid = false;
+    }
+
+    // Message validation (should be more than 100 words)
+    const wordCount = message.split(/\s+/).filter(word => word.length > 0).length;
+    if (message === '') {
+        showError('messageError', 'Please enter your message.');
+        isValid = false;
+    } else if (wordCount < 100) {
+        showError('messageError', 'Your message must contain at least 100 words.');
+        isValid = false;
+    }
+
+    // If all fields are valid, submit the form
+    if (isValid) {
+        alert('Form submitted successfully!');
+        // Here, you can perform the form submission using AJAX or traditional form submission
+    }
+});
+
+// Function to show error message
+function showError(fieldId, errorMessage) {
+    const errorElement = document.getElementById(fieldId);
+    errorElement.textContent = errorMessage;
+    errorElement.style.display = 'block';
+}
+
+// Function to clear all error messages
+function clearErrors() {
+    const errorElements = document.querySelectorAll('.error');
+    errorElements.forEach(error => error.style.display = 'none');
+}
+// Rotating text animation
+const roles = ['Frontend Developer', 'UI/UX Enthusiast', 'Web Developer'];
+let index = 0;
+const rotateText = document.getElementById('rotate-text');
+
+function rotateRole() {
+    rotateText.textContent = roles[index];
+    index = (index + 1) % roles.length;
+}
+
+setInterval(rotateRole, 3000);  // Changes every 3 seconds
