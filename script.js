@@ -270,3 +270,26 @@ function rotateRole() {
 }
 
 setInterval(rotateRole, 3000);  // Changes every 3 seconds
+// Toggle Navbar on Mobile
+const menuIcon = document.getElementById('menu-icon');
+const navbar = document.querySelector('.navbar');
+const logo = document.querySelector('.logo');
+
+// When clicking on the menu icon, toggle the navbar visibility
+menuIcon.addEventListener('click', () => {
+    navbar.classList.toggle('active');
+});
+
+// Also toggle the navbar when clicking on the logo (mobile version)
+logo.addEventListener('click', () => {
+    if (window.innerWidth <= 768) {
+        navbar.classList.toggle('active');
+    }
+});
+
+// Ensure the navbar hides when resizing the screen back to desktop
+window.addEventListener('resize', () => {
+    if (window.innerWidth > 768) {
+        navbar.classList.remove('active');
+    }
+});

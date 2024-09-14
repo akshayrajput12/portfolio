@@ -869,3 +869,254 @@ section{
     margin-top: 5px;
     display: none;
 }
+
+
+
+/* Project Section Responsiveness */
+@media (max-width: 768px) {
+    .projects-row {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .project {
+        flex: 1 1 100%; /* Make projects take full width on smaller screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .projects-row {
+        padding: 0;
+    }
+
+    .project {
+        flex: 1 1 100%; /* Adjust to take up full width */
+        padding: 1rem;  /* Reduce padding for mobile */
+    }
+
+    .project h3 {
+        font-size: 1.8rem; /* Adjust heading size for mobile */
+    }
+
+    .project p {
+        font-size: 1.4rem; /* Reduce text size */
+    }
+}
+/* Hide navbar on mobile */
+.navbar {
+    display: none;  /* Hidden by default on mobile */
+}
+
+#menu-icon {
+    display: block; /* Show the menu icon on smaller screens */
+}
+
+/* Show navbar when active */
+.navbar.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-color);
+}
+
+.navbar a {
+    padding: 1rem;
+    border-bottom: 1px solid var(--main-color); /* Styling each link */
+}
+
+/* Hide navbar menu icon for larger screens */
+@media (min-width: 992px) {
+    #menu-icon {
+        display: none;
+    }
+
+    .navbar {
+        display: flex;
+    }
+}
+
+
+/*mobile */
+/* General responsiveness for mobile */
+@media (max-width: 768px) {
+    html {
+        font-size: 50%;
+    }
+    
+    .home-content h1 {
+        font-size: 3.5rem; /* Smaller font for mobile */
+    }
+
+    .home-content p {
+        font-size: 1.2rem;
+    }
+
+    .btn-box {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .navbar {
+        display: none;
+    }
+
+    .navbar.active {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .project {
+        flex: 1 1 100%; /* Make projects take full width */
+        margin-bottom: 2rem;
+    }
+
+    /* Social icons resizing */
+    .home-sci a {
+        width: 30px;
+        height: 30px;
+    }
+
+    .home-sci {
+        bottom: 2rem;
+    }
+}
+
+/* Adjust for even smaller screens */
+@media (max-width: 576px) {
+    .home-content h1 {
+        font-size: 2.8rem; 
+    }
+
+    .home-content p {
+        font-size: 1.1rem;
+    }
+
+    .btn-box {
+        flex-direction: column;
+        gap: 0.8rem;
+    }
+
+    .project {
+        padding: 1rem;
+    }
+}
+/* Fade in from below for all sections */
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Scale and fade-in effect */
+@keyframes scaleUp {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.home-content {
+    animation: scaleUp 1.5s ease-in-out both;
+}
+
+.home-sci a {
+    animation: scaleUp 1.5s ease-in-out 0.5s both; /* Social icons animate in with delay */
+}
+
+
+/* Projects slide in from left */
+@keyframes slideInLeft {
+    0% {
+        transform: translateX(-100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.projects-row .project {
+    animation: slideInLeft 1.2s ease-in-out both;
+}
+
+
+@keyframes bounceProgress {
+    0% {
+        transform: scaleX(0.6);
+    }
+    50% {
+        transform: scaleX(1.2);
+    }
+    100% {
+        transform: scaleX(1);
+    }
+}
+
+.skills-content .progress .bar span {
+    animation: bounceProgress 1s ease-in-out both;
+}
+/* Button hover animation */
+@keyframes buttonHover {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+.btn:hover {
+    animation: buttonHover 0.5s ease-in-out both;
+}
+/* Navbar sliding in from the top */
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.navbar.active {
+    animation: slideDown 0.5s ease-in-out both;
+}
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transition: all 0.5s;
+}
+
+.btn:hover::before {
+    left: 100%;
+}
