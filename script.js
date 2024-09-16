@@ -293,3 +293,40 @@ window.addEventListener('resize', () => {
         navbar.classList.remove('active');
     }
 });
+
+
+// Form submission handler
+document.getElementById('contactForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent default form submission
+
+    // Form submission via Web3Forms
+    const formData = new FormData(this);
+
+    fetch(this.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(result => {
+        if (result.success) {
+            // Show the Thank You popup
+            document.getElementById('thankYouPopup').style.display = 'flex';
+            
+            // Reload the page after 5 seconds
+            setTimeout(() => {
+                location.reload();
+            }, 5000); // 5 seconds delay before reload
+        } else {
+            alert('There was an error submitting your message. Please try again.');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
+});
+
+// Close popup function
+function closePopup() {
+    document.getElementById('thankYouPopup').style.display = 'none';
+    location.reload(); // Reload the page when the popup is closed
+}
