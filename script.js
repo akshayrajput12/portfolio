@@ -330,3 +330,40 @@ function closePopup() {
     document.getElementById('thankYouPopup').style.display = 'none';
     location.reload(); // Reload the page when the popup is closed
 }
+
+// Add this to your existing JavaScript
+
+// Tilt effect for project cards
+VanillaTilt.init(document.querySelectorAll(".project-card"), {
+    max: 25,
+    speed: 400,
+    glare: true,
+    "max-glare": 0.5,
+});
+
+// Intersection Observer for project cards
+const projectCards = document.querySelectorAll('.project-card');
+const projectObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('show');
+            projectObserver.unobserve(entry.target);
+        }
+    });
+}, {
+    threshold: 0.5
+});
+
+projectCards.forEach(card => {
+    projectObserver.observe(card);
+});
+
+// Hover effect for tech stack items
+document.querySelectorAll('.tech-stack span').forEach(span => {
+    span.addEventListener('mouseenter', () => {
+        span.style.transform = 'scale(1.1) rotate(5deg)';
+    });
+    span.addEventListener('mouseleave', () => {
+        span.style.transform = 'scale(1) rotate(0deg)';
+    });
+});
